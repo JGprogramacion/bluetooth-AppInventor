@@ -11,7 +11,7 @@ char dato = 0;                                        //Declarar variable dato c
 void setup(){
   Serial.begin(9600);                                 //Inicializar comunicación serial para ver y enviar los comandos AT(debe estar en 9600 baudios en el serial monitor)
   Serial.print("Monitor serial preparado.");          //Mensaje para confirmar comunicación serie.
-  myBT.begin(38400);                                  //Inicializar velocidad de comunicación del modulo bluetooth. (Con modulo HC05 se maneja una comunicación de 38400 baudios, con HC06 se maneja una comunicación de 9600)
+  myBT.begin(9600);                                  //Inicializar velocidad de comunicación del modulo bluetooth. (Con modulo HC05 se maneja una comunicación de 38400 baudios, con HC06 se maneja una comunicación de 9600)
   pinMode(ledPrueba,OUTPUT);                          //Declarar led de prueba como salida.
 }
 void loop(){
