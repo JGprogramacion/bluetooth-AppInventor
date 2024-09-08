@@ -2,24 +2,25 @@
 Cuando se refiere a serial, es la comuncicaión entre arduino y la computadora.
 Cuando se refiere a myBT, es la comunicación entre arduino y el modulo.
 */
+
 #include<SoftwareSerial.h>                            //incluir libreria para utilizar los comandos del modulo bluetooth.
 
-SoftwareSerial myBT(10,11);                           //Pin de conexión RX-->pin 11, TX-->pin 10.
-int ledPrueba = 13;                                   //Asignar pin de arduino para el led de rueba.
+SoftwareSerial myBT(10,11);                           //Pines de conexión BT. RX-->pin 11, TX-->pin 10.
+int ledPrueba = 2;                                    //Asignar pin de arduino para el led de prueba.
 char dato = 0;                                        //Declarar variable dato como tipo char para almacenar el caracter enviado.
 
 void setup(){
   Serial.begin(9600);                                 //Inicializar comunicación serial para ver y enviar los comandos AT(debe estar en 9600 baudios en el serial monitor)
-  Serial.print("Monitor serial preparado.");          //Mensaje para confirmar comunicación serie.
-  myBT.begin(9600);                                  //Inicializar velocidad de comunicación del modulo bluetooth. (Con modulo HC05 se maneja una comunicación de 38400 baudios, con HC06 se maneja una comunicación de 9600)
+  Serial.println("Monitor serial preparado.");        //Mensaje para confirmar comunicación serie.
+  myBT.begin(9600);                                   //Inicializar velocidad de comunicación del modulo bluetooth. (Con modulo HC05 se maneja una comunicación de 38400 baudios, con HC06 se maneja una comunicación de 9600)
   pinMode(ledPrueba,OUTPUT);                          //Declarar led de prueba como salida.
 }
 void loop(){
   if(myBT.available()){                               //Condición para verificar información en el monitor serial, si es verdadero almacena el caracter en la variable dato.
     dato = myBT.read();                               //Alamcenar el caracter enviado en la variable dato.
     delay(30);                                        //Tiempo para recepción de señal y almacenamiento de variable. 
-    Serial.print(dato);                          
-    if(dato =='a'){                                   //Condición para realizar una acción con el arduino.
+    Serial.println(dato);                             //Imprime el dato recibido en el monitor serial.                       
+    if(dato =='a'){                                   //Condición para realizar una acción con el arduino (si registra letra a).
       digitalWrite(ledPrueba,1);                      //Acción realizada al reconocer el caracter adquirido.
     }
     if(dato =='b'){
